@@ -51,6 +51,7 @@
   <script>
     const ports = [9000, 9100, 9200, 9300, 9400, 9501, 9201, 9403, 9301];
     const ip = "195.250.29.114";
+    const proxy = "https://realisimhq-proxy.glitch.me"; // Change this to your actual proxy URL
 
     async function fetchServer(port) {
       const container = document.createElement("div");
@@ -63,7 +64,7 @@
       document.getElementById("servers").appendChild(container);
 
       try {
-        const response = await fetch(`http://${ip}:${port}/JSON|INFO`);
+        const response = await fetch(`${proxy}/status?ip=${ip}&port=${port}`);
         if (!response.ok) throw new Error("Unreachable");
         const data = await response.json();
 
