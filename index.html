@@ -4,10 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RealiSim HQ Server Status</title>
+
+  <!-- Discord Embed -->
   <meta property="og:title" content="RealiSim HQ Assetto Corsa Servers" />
   <meta property="og:description" content="Live status for all RealiSim HQ AC servers. Join now!" />
   <meta property="og:image" content="https://i.imgur.com/EECeJEg.png" />
-  <meta property="og:url" content="https://realisimhq.github.io/TANDEMS/" />
+  <meta property="og:url" content="https://realisimhq.github.io/" />
+
   <style>
     body {
       background-color: #111;
@@ -29,11 +32,6 @@
       font-weight: bold;
       margin-bottom: 0.5em;
     }
-    .players {
-      font-size: 1.1em;
-      color: #fff;
-      margin-bottom: 0.5em;
-    }
     a {
       color: #ff1493;
       text-decoration: none;
@@ -51,35 +49,24 @@
   <script>
     const ports = [9000, 9100, 9200, 9300, 9400, 9501, 9201, 9403, 9301];
     const ip = "195.250.29.114";
-    const proxy = "https://canary-grey-kileskus.glitch.me"; // Your live Glitch proxy URL
+    const proxy = "https://realisimhq-proxy.glitch.me";
 
     async function fetchServer(port) {
       const container = document.createElement("div");
       container.className = "server";
       container.innerHTML = `
         <div class="server-name">Loading...</div>
-        <div class="players"></div>
         <a href="https://acstuff.club/s/q:race/online/join?ip=${ip}&httpPort=${port}" target="_blank">Join Server</a>
       `;
       document.getElementById("servers").appendChild(container);
 
       try {
         const response = await fetch(`${proxy}/status?ip=${ip}&port=${port}`);
-        if (!response.ok) throw new Error("Unreachable");
         const data = await response.json();
-        console.log(`Raw JSON for port ${port}:`, data); // ← add this
 
-
-        const name = data.name || data.serverName || `Server on port ${port}`;
-        const clients = data.clients ?? data.session?.clients ?? "?";
-        const maxclients = data.maxclients ?? data.session?.maxclients ?? "?";
-        const playerCount = `${clients}/${maxclients} players`;
-
-        container.querySelector(".server-name").textContent = name;
-        container.querySelector(".players").textContent = playerCount;
+        container.querySelector(".server-name").textContent = data.name || `Server on port ${port}`;
       } catch (err) {
         container.querySelector(".server-name").textContent = `Offline or unreachable (${port})`;
-        container.querySelector(".players").textContent = "";
       }
     }
 
