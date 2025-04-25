@@ -7,7 +7,7 @@
   <meta property="og:title" content="RealiSim HQ Assetto Corsa Servers" />
   <meta property="og:description" content="Live status for all RealiSim HQ AC servers. Join now!" />
   <meta property="og:image" content="https://i.imgur.com/EECeJEg.png" />
-  <meta property="og:url" content="https://realisimhq.github.io/" />
+  <meta property="og:url" content="https://realisimhq.github.io/TANDEMS/" />
   <style>
     body {
       background-color: #111;
@@ -51,7 +51,7 @@
   <script>
     const ports = [9000, 9100, 9200, 9300, 9400, 9501, 9201, 9403, 9301];
     const ip = "195.250.29.114";
-    const proxy = "https://canary-grey-kileskus.glitch.me"; // Change this to your actual proxy URL
+    const proxy = "https://canary-grey-kileskus.glitch.me"; // Your live Glitch proxy URL
 
     async function fetchServer(port) {
       const container = document.createElement("div");
@@ -68,8 +68,10 @@
         if (!response.ok) throw new Error("Unreachable");
         const data = await response.json();
 
-        const name = data.name || `Server on port ${port}`;
-        const playerCount = `${data.clients}/${data.maxclients} players`;
+        const name = data.name || data.serverName || `Server on port ${port}`;
+        const clients = data.clients ?? data.session?.clients ?? "?";
+        const maxclients = data.maxclients ?? data.session?.maxclients ?? "?";
+        const playerCount = `${clients}/${maxclients} players`;
 
         container.querySelector(".server-name").textContent = name;
         container.querySelector(".players").textContent = playerCount;
