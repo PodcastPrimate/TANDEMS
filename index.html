@@ -67,6 +67,8 @@
         const response = await fetch(`${proxy}/status?ip=${ip}&port=${port}`);
         if (!response.ok) throw new Error("Unreachable");
         const data = await response.json();
+        console.log(`Raw JSON for port ${port}:`, data); // ← add this
+
 
         const name = data.name || data.serverName || `Server on port ${port}`;
         const clients = data.clients ?? data.session?.clients ?? "?";
