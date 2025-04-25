@@ -50,8 +50,9 @@
 
   <script>
     const ports = [9000, 9100, 9200, 9300, 9400, 9501, 9201, 9403, 9301];
+    const ip = "195.250.29.114";
 
-    async function fetchServer(ip, port) {
+    async function fetchServer(port) {
       const container = document.createElement("div");
       container.className = "server";
       container.innerHTML = `
@@ -62,24 +63,22 @@
       document.getElementById("servers").appendChild(container);
 
       try {
-        const response = await fetch(`https://acstuff.ru/s/q:race?ip=${ip}&httpPort=${port}`);
-        const text = await response.text();
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(text, "text/html");
+        const response = await fetch(`http://${ip}:${port}/JSON|INFO`);
+        if (!response.ok) throw new Error("Unreachable");
+        const data = await response.json();
 
-        const name = doc.querySelector(".server-name")?.textContent?.trim() || `Server on port ${port}`;
-        const players = doc.querySelector(".server-entry .players")?.textContent?.trim() || "";
+        const name = data.name || `Server on port ${port}`;
+        const playerCount = `${data.clients}/${data.maxclients} players`;
 
         container.querySelector(".server-name").textContent = name;
-        container.querySelector(".players").textContent = players;
+        container.querySelector(".players").textContent = playerCount;
       } catch (err) {
         container.querySelector(".server-name").textContent = `Offline or unreachable (${port})`;
         container.querySelector(".players").textContent = "";
       }
     }
 
-    ports.forEach(port => fetchServer("195.250.29.114", port));
+    ports.forEach(fetchServer);
   </script>
 </body>
 </html>
-
