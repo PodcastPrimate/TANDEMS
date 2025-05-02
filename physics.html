@@ -1,66 +1,168 @@
----
-layout: default
-title: Physics Breakdown
-nav_order: 2
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project T.A.N.D.E.M.S. Physics Breakdown</title>
 
-# Extended Physics Breakdown – Project T.A.N.D.E.M.S.
+  <!-- Discord Embed -->
+  <meta property="og:title" content="Project T.A.N.D.E.M.S. Physics Breakdown" />
+  <meta property="og:description" content="Why T.A.N.D.E.M.S. physics push Assetto Corsa realism beyond EVO." />
+  <meta property="og:image" content="https://i.imgur.com/EECeJEg.png" />
+  <meta property="og:url" content="https://realisimhq.github.io/physics.html" />
 
-RealSimHQ's T.A.N.D.E.M.S. physics are built using the bleeding-edge CSP features. Here's what sets them apart from vanilla AC and AC EVO.
+  <style>
+    body {
+      background-color: #111;
+      color: #00ffff;
+      font-family: Arial, sans-serif;
+      padding: 2em;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1em;
+      color: #00ffff;
+    }
+    h2 {
+      margin-top: 2em;
+      color: #ff1493;
+      font-size: 1.5em;
+    }
+    details {
+      background: #222;
+      border: 1px solid #00ffff;
+      border-radius: 8px;
+      margin: 1em 0;
+      padding: 1em;
+    }
+    summary {
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      color: #ff1493;
+    }
+    summary:hover {
+      color: #fff;
+    }
+    p {
+      margin-top: 0.5em;
+      color: #ccc;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1em;
+      color: #00ffff;
+    }
+    th, td {
+      border: 1px solid #00ffff;
+      padding: 0.75em;
+      text-align: center;
+    }
+    th {
+      background-color: #222;
+    }
+    td:first-child {
+      text-align: left;
+    }
+    .footer {
+      margin-top: 3em;
+      text-align: center;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>Project T.A.N.D.E.M.S.<br>Extended Physics Breakdown</h1>
 
----
+  <details>
+    <summary>• 5-Point Tyre Contact vs 1-Point</summary>
+    <p><strong>What it is:</strong> CSP 0.20+ replaces the single-patch tyre model with five independent contact points.</p>
+    <p><strong>Why it matters:</strong> Realistic transitions over curbs, grass, and bumps—no more “pop” or grip loss.</p>
+  </details>
 
-<h2 style="margin-top: 3em;">EVO vs CSP: What You’re Missing Without CSP Extended</h2>
+  <details>
+    <summary>• Dynamic Chassis Flex & Torsion</summary>
+    <p><strong>What it is:</strong> Real-time body/frame torsion under load.</p>
+    <p><strong>Why it matters:</strong> The car twists and settles like real life—no more rigid block behavior.</p>
+  </details>
 
-<table style="width: 100%; border-collapse: collapse; margin-top: 1em; color: #00ffff;">
-  <thead>
-    <tr style="background-color: #222;">
-      <th style="padding: 0.5em; border: 1px solid #00ffff;">Feature</th>
-      <th style="padding: 0.5em; border: 1px solid #00ffff;">CSP Extended</th>
-      <th style="padding: 0.5em; border: 1px solid #00ffff;">AC EVO</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="padding: 0.5em; border: 1px solid #00ffff;">5-Point Tyre Contacts</td>
-      <td style="text-align: center;">✅</td>
-      <td style="text-align: center;">❌</td>
-    </tr>
-    <tr>
-      <td style="padding: 0.5em; border: 1px solid #00ffff;">Cosmic Suspension</td>
-      <td style="text-align: center;">✅</td>
-      <td style="text-align: center;">❌</td>
-    </tr>
-    <tr>
-      <td style="padding: 0.5em; border: 1px solid #00ffff;">Dynamic Chassis Flex</td>
-      <td style="text-align: center;">✅</td>
-      <td style="text-align: center;">⚠️</td>
-    </tr>
-    <tr>
-      <td style="padding: 0.5em; border: 1px solid #00ffff;">Live Physics Swaps</td>
-      <td style="text-align: center;">✅</td>
-      <td style="text-align: center;">❌</td>
-    </tr>
-    <tr>
-      <td style="padding: 0.5em; border: 1px solid #00ffff;">Advanced Wear & ERP</td>
-      <td style="text-align: center;">✅</td>
-      <td style="text-align: center;">❌</td>
-    </tr>
-  </tbody>
-</table>
+  <details>
+    <summary>• Precision FFB Tweaks</summary>
+    <p><strong>What it is:</strong> New force-feedback settings (damping, smoothing, channel tweaks).</p>
+    <p><strong>Why it matters:</strong> You feel weight transfer, tyre scrub, and suspension—not just motor torque.</p>
+  </details>
 
-<p style="margin-top: 2em; color: #ccc;">
-  <strong>Verdict:</strong> <br>
-  <strong>AC EVO</strong> is a <em>solid</em> step above vanilla AC—smoother transitions, better default FFB, more stable tyre response.<br>
-  <strong>CSP + Extended Physics</strong> is the <em>gold standard</em> if you want tunable realism: multi-point tyres, atomic suspensions, dynamic body flex, and in-session physics changes.<br><br>
-  🏁 <strong>T.A.N.D.E.M.S.</strong> was built on CSP Extended to push realism as far as AC can go—because sideways deserves science too.
-</p>
+  <details>
+    <summary>• Cosmic Suspension Physics Engine</summary>
+    <p><strong>What it is:</strong> Joint-based suspensions using ball joints, sliders, and distance constraints with LUT-tuned spring/damper values.</p>
+    <p><strong>Why it matters:</strong> Real camber changes, roll center shifts, and dynamic anti-dive/squat—live during driving.</p>
+  </details>
 
-## Verdict
+  <details>
+    <summary>• 4 Extra Tyre Sets with Warming & Wear</summary>
+    <p><strong>What it is:</strong> Grip based on tyre temperature and progressive degradation.</p>
+    <p><strong>Why it matters:</strong> Lap-to-lap feel and behavior evolve like a real race weekend.</p>
+  </details>
 
-- **AC EVO** is a *solid* step above vanilla AC—smooth transitions, better default FFB, more stable tyre response.
-- **CSP + Extended Physics** is the *gold standard* if you want tunable realism: multi-point tyres, atomic suspensions, dynamic body flex, and in-session physics changes.
+  <details>
+    <summary>• Custom Collision Models</summary>
+    <p><strong>What it is:</strong> Server-side settings for bounce, friction, CFM, ERP, and mass multipliers.</p>
+    <p><strong>Why it matters:</strong> Tune impact realism—soft bounce, hard jolt, or anything in between.</p>
+  </details>
 
-> 🏁 T.A.N.D.E.M.S. was built on CSP Extended to push realism as far as AC can go—because sideways deserves science too.
+  <details>
+    <summary>• Exclusive to CSP – AC EVO Can’t Use It</summary>
+    <p><strong>What it is:</strong> Assetto Corsa Evo doesn’t support CSP or Content Manager mods.</p>
+    <p><strong>Why it matters:</strong> All these advanced physics features only work with paid CSP preview builds.</p>
+  </details>
 
----
+  <h2>EVO vs CSP: What You’re Missing Without CSP Extended</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>CSP Extended</th>
+        <th>AC EVO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>5-Point Tyre Contacts</td>
+        <td>✅</td>
+        <td>❌</td>
+      </tr>
+      <tr>
+        <td>Cosmic Suspension</td>
+        <td>✅</td>
+        <td>❌</td>
+      </tr>
+      <tr>
+        <td>Dynamic Chassis Flex</td>
+        <td>✅</td>
+        <td>⚠️ Tuned Rigid Body</td>
+      </tr>
+      <tr>
+        <td>Live Physics Swaps</td>
+        <td>✅</td>
+        <td>❌</td>
+      </tr>
+      <tr>
+        <td>Advanced Wear & ERP</td>
+        <td>✅</td>
+        <td>❌</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="footer">
+    <p><strong>Verdict:</strong><br>
+      AC EVO is a <em>solid</em> upgrade from vanilla Assetto Corsa—smoother transitions, improved FFB, and a cleaner default driving experience.<br><br>
+      But <strong>CSP + Extended Physics</strong> is still the crown jewel: 5-point tyres, joint-based suspensions, dynamic chassis flex, live physics swaps—it's simulation with no compromises.<br><br>
+      🏁 <strong>T.A.N.D.E.M.S.</strong> was built on CSP Extended to push realism as far as AC can go—because sideways deserves science too.
+    </p>
+  </div>
+</body>
+</html>
