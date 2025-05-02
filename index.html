@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RealiSim HQ Server Status</title>
+  <title>RealiSim HQ – Project T.A.N.D.E.M.S.</title>
 
   <!-- Discord Embed -->
-  <meta property="og:title" content="RealiSim HQ Assetto Corsa Servers" />
-  <meta property="og:description" content="Live status for all RealiSim HQ AC servers. Join now!" />
+  <meta property="og:title" content="RealiSim HQ – Project T.A.N.D.E.M.S." />
+  <meta property="og:description" content="Home of the most realistic drift physics in Assetto Corsa." />
   <meta property="og:image" content="https://i.imgur.com/EECeJEg.png" />
   <meta property="og:url" content="https://realisimhq.github.io/" />
 
@@ -16,61 +16,50 @@
       background-color: #111;
       color: #00ffff;
       font-family: Arial, sans-serif;
-      text-align: center;
       padding: 2em;
+      text-align: center;
     }
-    .server {
-      background: #222;
-      padding: 1.5em;
-      margin: 1.2em auto;
-      border: 2px solid #00ffff;
-      border-radius: 1em;
-      max-width: 600px;
-    }
-    .server-name {
-      font-size: 1.5em;
-      font-weight: bold;
+    h1 {
+      font-size: 2.5em;
       margin-bottom: 0.5em;
     }
-    a {
-      color: #ff1493;
+    h2 {
+      font-weight: normal;
+      color: #aaa;
+    }
+    a.button {
+      display: inline-block;
+      margin: 1em;
+      padding: 1em 2em;
+      border: 2px solid #00ffff;
+      color: #00ffff;
       text-decoration: none;
       font-weight: bold;
+      border-radius: 8px;
+      transition: all 0.2s ease;
     }
-    a:hover {
-      text-decoration: underline;
+    a.button:hover {
+      background-color: #00ffff;
+      color: #111;
+    }
+    .nav {
+      margin-top: 2em;
     }
   </style>
 </head>
 <body>
-  <h1>RealiSim HQ Server Status</h1>
-  <div id="servers"></div>
+  <h1>RealiSim HQ</h1>
+  <h2>Project T.A.N.D.E.M.S. | Extended Physics | Real Drift</h2>
 
-  <script>
-    const ports = [9000, 9100, 9200, 9300, 9400, 9501, 9201, 9403, 9301];
-    const ip = "195.250.29.114";
-    const proxy = "https://realisimhq-proxy.glitch.me";
+  <div class="nav">
+    <a class="button" href="physics.html">📘 Physics Breakdown</a>
+    <a class="button" href="https://linktr.ee/RealiSimHQ" target="_blank">🌐 Linktree Hub</a>
+    <a class="button" href="https://www.patreon.com/RealSimHQ" target="_blank">💸 Support on Patreon</a>
+    <a class="button" href="https://www.youtube.com/@PodMods" target="_blank">▶️ YouTube Channel</a>
+  </div>
 
-    async function fetchServer(port) {
-      const container = document.createElement("div");
-      container.className = "server";
-      container.innerHTML = `
-        <div class="server-name">Loading...</div>
-        <a href="https://acstuff.club/s/q:race/online/join?ip=${ip}&httpPort=${port}" target="_blank">Join Server</a>
-      `;
-      document.getElementById("servers").appendChild(container);
-
-      try {
-        const response = await fetch(`${proxy}/status?ip=${ip}&port=${port}`);
-        const data = await response.json();
-
-        container.querySelector(".server-name").textContent = data.name || `Server on port ${port}`;
-      } catch (err) {
-        container.querySelector(".server-name").textContent = `Offline or unreachable (${port})`;
-      }
-    }
-
-    ports.forEach(fetchServer);
-  </script>
+  <p style="margin-top: 3em; color: #888;">
+    Built for precision. Tuned for tandem. Pushed by passion.
+  </p>
 </body>
 </html>
