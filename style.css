@@ -1,4 +1,5 @@
 /* style.css */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -17,26 +18,22 @@ body {
     border-bottom: 2px solid #4a4a6a;
 }
 
-.tandem-logo {
-    max-width: 150px; /* Adjust size as needed */
+.main-branding-logo { /* Class for your combined TANDEM/Sponsors image */
+    max-width: 80%; /* Adjust as needed, e.g., 600px for fixed width */
     height: auto;
-    margin-bottom: 10px;
-}
-
-.sponsor-logos {
-    max-width: 80%; /* Adjust size as needed */
-    height: auto;
-    margin-top: 10px;
+    margin: 0 auto 10px auto; /* Center it with some bottom margin */
+    display: block; /* Make it a block element to apply margin:auto */
 }
 
 .site-title {
     color: #ffcc00;
     margin-top: 10px;
+    font-size: 2.5em; /* Make the title larger */
 }
 
 /* Slideshow Container */
 .slideshow-container {
-    max-width: 900px;
+    max-width: 1200px; /* Increased max-width for larger photos */
     position: relative;
     margin: auto;
     overflow: hidden; /* Hide parts of images outside container */
@@ -55,6 +52,9 @@ body {
     width: 100%;
     height: auto;
     display: block; /* Remove extra space below image */
+    /* If images have varying aspect ratios and you want a consistent height: */
+    /* object-fit: cover;
+    height: 600px; /* Example fixed height, adjust as needed */
 }
 
 /* Optional: Next & previous buttons */
@@ -220,5 +220,8 @@ body {
     }
     .sidebar {
         width: 100%;
+    }
+    .main-branding-logo {
+        max-width: 100%; /* Allow logo to take full width on small screens */
     }
 }
