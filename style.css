@@ -19,11 +19,10 @@ body {
 }
 
 .main-branding-logo { /* Class for your combined TANDEM/Sponsors image */
-    max-width: 300px; /* Adjust this value for the overall width of the logo block */
+    max-width: 200px; /* Adjusted to 1/6th-ish of a large screen width (e.g., 1200px / 6 = 200px) */
     height: auto;
     margin: 0 auto 10px auto; /* Center it with some bottom margin */
     display: block; /* Make it a block element to apply margin:auto */
-    /* If you want it to be even smaller, try 200px or 150px */
 }
 
 
@@ -54,9 +53,9 @@ body {
     width: 100%;
     height: auto;
     display: block; /* Remove extra space below image */
-    /* If images have varying aspect ratios and you want a consistent height: */
-    /* object-fit: cover;
-    height: 600px; /* Example fixed height, adjust as needed */
+    /* If images have varying aspect ratios and you want a consistent height, uncomment and adjust: */
+    /* object-fit: cover; */
+    /* height: 600px; /* Example fixed height, adjust as needed */
 }
 
 /* Optional: Next & previous buttons */
