@@ -19,11 +19,13 @@ body {
 }
 
 .main-branding-logo { /* Class for your combined TANDEM/Sponsors image */
-    max-width: 80%; /* Adjust as needed, e.g., 600px for fixed width */
+    max-width: 300px; /* Adjust this value for the overall width of the logo block */
     height: auto;
     margin: 0 auto 10px auto; /* Center it with some bottom margin */
     display: block; /* Make it a block element to apply margin:auto */
+    /* If you want it to be even smaller, try 200px or 150px */
 }
+
 
 .site-title {
     color: #ffcc00;
