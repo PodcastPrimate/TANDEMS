@@ -59,14 +59,14 @@ h3 { font-size: 1.8em; }
     color: #1a1a1a;
 }
 
-.download-links { /* Added for grouping CTA buttons */
+.download-links {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     margin-top: 20px;
 }
 
-/* Hero Section (no changes here) */
+/* Hero Section - Now with background slideshow */
 .hero-section {
     position: relative;
     height: 100vh;
@@ -74,18 +74,59 @@ h3 { font-size: 1.8em; }
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-image: url('https://imgur.com/6I0PALj.jpg'); /* Your hero car image */
-    background-size: cover;
-    background-position: center;
+    /* REMOVED: background-image property */
+    background-color: #000; /* Fallback background color */
     color: white;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-    overflow: hidden;
+    overflow: hidden; /* Hide overflow from absolute positioned children */
+}
+
+/* New: Slideshow container within hero */
+.hero-background-slideshow {
+    position: absolute; /* Position relative to hero-section */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Behind content */
+    border-radius: 0; /* Remove previous border-radius */
+    box-shadow: none; /* Remove previous box-shadow */
+}
+
+.hero-background-slideshow .mySlides {
+    position: absolute; /* Position slides within the slideshow container */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    animation: none; /* Remove fade animation from the previous slideshow */
+}
+
+.hero-background-slideshow .mySlides img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Crucial: make image fill container, cropping if necessary */
+    border-radius: 0; /* Remove previous border-radius */
+}
+
+/* NEW: Overlay for hero text readability */
+.hero-slideshow-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent black overlay */
+    z-index: 1; /* Above slideshow, below content */
 }
 
 .hero-content {
-    z-index: 1;
+    z-index: 2; /* Ensure content is on top */
+    position: relative; /* Ensure content is positioned correctly above overlay */
     padding: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Stronger shadow for readability */
 }
+
 
 /* Section Styling (no changes here) */
 section {
@@ -98,7 +139,7 @@ section {
     background-color: #1a1a1a;
 }
 
-/* CORRECTED: Partners Section (now at bottom and properly sized) */
+/* Partners Section (still at bottom, no changes from last fix) */
 .partners-section {
     background-color: #1a1a1a;
     padding: 40px 0;
@@ -107,13 +148,12 @@ section {
 
 .partner-links-grid {
     display: grid;
-    /* Adjusted to create smaller, more consistent thumbnail sizes */
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Larger base size for 50% increase */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 20px;
     justify-content: center;
     align-items: center;
     margin-top: 30px;
-    max-width: 1000px; /* Max width for the grid */
+    max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -122,67 +162,28 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Set a consistent size for the container of each logo */
-    width: 150px; /* Increased size (original was around 100px) */
-    height: 100px; /* Adjusted proportionally (original was around 80px) */
-    overflow: hidden; /* Hide anything that overflows this box */
-    margin: 0 auto; /* Center items within their grid cell */
+    width: 150px;
+    height: 100px;
+    overflow: hidden;
+    margin: 0 auto;
 }
 
 .partner-item img {
-    width: 100%; /* Make image fill the partner-item's width */
-    height: 100%; /* Make image fill the partner-item's height */
-    object-fit: contain; /* Shrink to fit inside, maintaining aspect ratio */
-    /* REMOVED: filter: grayscale(100%); */ /* Display in full color */
-    transition: transform 0.3s ease; /* Keep hover effect */
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
     border-radius: 5px;
 }
 
 .partner-item img:hover {
-    /* REMOVED: filter: grayscale(0%); */ /* No longer needed as it's always color */
     transform: scale(1.05);
 }
 
+/* Original car-slideshow-section is removed */
 
-/* Car Slideshow Section (no changes needed for appearance, but JS is fixed) */
-.car-slideshow-section {
-    background-color: #2a2a2a;
-    padding: 60px 0;
-}
 
-.slideshow-container {
-    max-width: 800px;
-    position: relative;
-    margin: auto;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0,240,255,0.4);
-}
-
-.mySlides {
-    display: none; /* Hidden by default - JS will handle this */
-    text-align: center;
-}
-
-.mySlides img {
-    width: 100%;
-    height: 300px; /* Fixed height for slideshow */
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-/* Fading animation (no changes here) */
-.fade {
-    animation-name: fade;
-    animation-duration: 1.5s;
-}
-
-@keyframes fade {
-    from {opacity: .4}
-    to {opacity: 1}
-}
-
-/* Accordion Styling for Features (no changes needed for appearance, but JS is fixed) */
+/* Accordion Styling for Features (no changes here) */
 .features-accordion-section {
     background-color: #1a1a1a;
 }
@@ -229,16 +230,16 @@ section {
 }
 
 .accordion-content {
-    padding: 0 25px; /* Initial padding 0 */
+    padding: 0 25px;
     background-color: #2a2a2a;
-    max-height: 0; /* Hidden initially */
+    max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s ease-out, padding 0.4s ease-out;
 }
 
 .accordion-content.show {
-    max-height: 1000px; /* Sufficiently large to reveal content */
-    padding: 25px; /* Apply padding when shown */
+    max-height: 1000px;
+    padding: 25px;
 }
 
 .accordion-content p {
@@ -264,7 +265,7 @@ section {
 }
 
 
-/* Testimonials Carousel (no changes needed for appearance, but JS is fixed) */
+/* Testimonials Carousel (no changes here) */
 .testimonials-section {
     position: relative;
     overflow: hidden;
@@ -328,12 +329,12 @@ footer {
     transform: translateY(0);
 }
 
-/* Responsive Design (updated partner section) */
+/* Responsive Design (updated partner section, and new hero slideshow) */
 @media (max-width: 768px) {
     h1 { font-size: 2.5em; }
     h2 { font-size: 2em; }
     .hero-content { padding: 10px; }
-    .mySlides img { height: 200px; }
+    /* Hero slideshow images will cover the full hero section */
     .carousel-nav {
         padding: 8px 12px;
         font-size: 1.2em;
@@ -342,11 +343,11 @@ footer {
         font-size: 1em;
     }
     .partner-links-grid {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Smaller grid cells for medium screens */
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
     .partner-item {
-        width: 100px; /* Adjust size */
-        height: 70px; /* Adjust size */
+        width: 100px;
+        height: 70px;
     }
 }
 
@@ -360,13 +361,13 @@ footer {
     .testimonial-slide p {
         font-size: 1em;
     }
-    .mySlides img { height: 150px; }
+    /* Hero slideshow images will cover the full hero section */
     .partner-links-grid {
-        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); /* Even smaller grid cells for small screens */
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
         gap: 10px;
     }
     .partner-item {
-        width: 70px; /* Adjust size */
-        height: 50px; /* Adjust size */
+        width: 70px;
+        height: 50px;
     }
 }
