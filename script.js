@@ -8,10 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const accordionContent = header.nextElementSibling;
             const chevronIcon = header.querySelector('i');
 
-            // Check if this accordion is currently active
             const isActive = header.classList.contains('active');
 
-            // Close all accordions first (this ensures only one is open at a time)
             document.querySelectorAll('.accordion-header').forEach(h => {
                 h.classList.remove('active');
                 const content = h.nextElementSibling;
@@ -25,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // If the clicked accordion was not active, open it
             if (!isActive) {
                 header.classList.add('active');
                 if (accordionContent) {
@@ -53,11 +50,15 @@ document.addEventListener('DOMContentLoaded', () => {
         currentTestimonialIndex = (currentTestimonialIndex < 0) ? testimonialSlides.length - 1 : currentTestimonialIndex;
         currentTestimonialIndex = (currentTestimonialIndex >= testimonialSlides.length) ? 0 : currentTestimonialIndex;
 
-        const slideWidth = testimonialSlides[0].clientWidth; // Use clientWidth for actual rendered width
+        const slideWidth = testimonialSlides[0].clientWidth;
+        // Explicitly set transform property
         testimonialCarousel.style.transform = `translateX(${-currentTestimonialIndex * slideWidth}px)`;
+        // Ensure display is block for visible slides if changed by other CSS
+        testimonialSlides.forEach((slide, index) => {
+            slide.style.display = 'block'; // Ensure all are display:block for measurement
+        });
     }
 
-    // Only attach listeners if elements exist and there's more than one slide
     if (prevButton && nextButton && testimonialCarousel && testimonialSlides.length > 1) {
         prevButton.addEventListener('click', () => {
             currentTestimonialIndex--;
@@ -72,48 +73,39 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', updateTestimonialCarousel);
         updateTestimonialCarousel(); // Initial call
     } else if (testimonialSlides.length <= 1) {
-        // If there's 0 or 1 slide, hide navigation buttons
         if (prevButton) prevButton.style.display = 'none';
         if (nextButton) nextButton.style.display = 'none';
-        // Ensure the single slide is visible
         if (testimonialSlides.length === 1) {
-             testimonialSlides[0].style.display = 'block';
+             testimonialSlides[0].style.display = 'block'; // Ensure single slide is visible
         }
     }
 
 
-    // --- Car Slideshow Logic (Automatic - now for Hero Background) ---
-    let heroSlideIndex = 0; // Use a distinct index variable for clarity
-    // TARGET THE NEW LOCATION OF SLIDES
+    // --- Car Slideshow Logic (Automatic - for Hero Background) ---
+    let heroSlideIndex = 0;
     const heroSlides = document.querySelectorAll('.hero-background-slideshow .mySlides');
 
     function showHeroSlides() {
         if (heroSlides.length === 0) return;
 
-        // Hide all slides first
         heroSlides.forEach(slide => {
             slide.style.display = "none";
         });
 
-        // Increment index, reset if at end
         heroSlideIndex++;
         if (heroSlideIndex > heroSlides.length) {
-            heroSlideIndex = 1; // Loop back to the first slide
+            heroSlideIndex = 1;
         }
 
-        // Display current slide
         heroSlides[heroSlideIndex - 1].style.display = "block";
 
-        // Call showHeroSlides again after 4 seconds (slightly longer for background)
-        setTimeout(showHeroSlides, 4000); // Changed to 4 seconds for background
+        setTimeout(showHeroSlides, 4000);
     }
 
-    // Only start the slideshow if there are slides
     if (heroSlides.length > 0) {
-        // Ensure the first slide is visible immediately on load
         heroSlides[0].style.display = "block";
-        heroSlideIndex = 1; // Set index for the next slide to be displayed by setTimeout
-        setTimeout(showHeroSlides, 4000); // Start the loop after initial display
+        heroSlideIndex = 1;
+        setTimeout(showHeroSlides, 4000);
     }
 
 
