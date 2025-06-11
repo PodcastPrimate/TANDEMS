@@ -59,7 +59,7 @@ h3 { font-size: 1.8em; }
     color: #1a1a1a;
 }
 
-.download-links {
+.download-links { /* Added for grouping CTA buttons */
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -74,7 +74,7 @@ h3 { font-size: 1.8em; }
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-image: url('https://imgur.com/6I0PALj.jpg');
+    background-image: url('https://imgur.com/6I0PALj.jpg'); /* Your hero car image */
     background-size: cover;
     background-position: center;
     color: white;
@@ -98,7 +98,7 @@ section {
     background-color: #1a1a1a;
 }
 
-/* **CORRECTED** Partners Section (now at bottom) */
+/* CORRECTED: Partners Section (now at bottom and properly sized) */
 .partners-section {
     background-color: #1a1a1a;
     padding: 40px 0;
@@ -107,13 +107,13 @@ section {
 
 .partner-links-grid {
     display: grid;
-    /* Use a fixed column width for thumbnails, with auto-fit for responsiveness */
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Each cell is at least 100px */
-    gap: 15px; /* Reduce gap slightly */
+    /* Adjusted to create smaller, more consistent thumbnail sizes */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Larger base size for 50% increase */
+    gap: 20px;
     justify-content: center;
     align-items: center;
     margin-top: 30px;
-    max-width: 900px; /* Constrain grid width if logos spread too wide */
+    max-width: 1000px; /* Max width for the grid */
     margin-left: auto;
     margin-right: auto;
 }
@@ -122,30 +122,29 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Set a fixed size for the container of each logo */
-    width: 100px; /* Thumbnail width */
-    height: 80px; /* Thumbnail height */
-    overflow: hidden; /* Crucial: hide anything outside this box */
+    /* Set a consistent size for the container of each logo */
+    width: 150px; /* Increased size (original was around 100px) */
+    height: 100px; /* Adjusted proportionally (original was around 80px) */
+    overflow: hidden; /* Hide anything that overflows this box */
     margin: 0 auto; /* Center items within their grid cell */
 }
 
 .partner-item img {
-    /* Set width/height directly on the image, combined with object-fit */
     width: 100%; /* Make image fill the partner-item's width */
     height: 100%; /* Make image fill the partner-item's height */
     object-fit: contain; /* Shrink to fit inside, maintaining aspect ratio */
-    filter: grayscale(100%);
-    transition: filter 0.3s ease, transform 0.3s ease;
+    /* REMOVED: filter: grayscale(100%); */ /* Display in full color */
+    transition: transform 0.3s ease; /* Keep hover effect */
     border-radius: 5px;
 }
 
 .partner-item img:hover {
-    filter: grayscale(0%);
+    /* REMOVED: filter: grayscale(0%); */ /* No longer needed as it's always color */
     transform: scale(1.05);
 }
 
 
-/* Car Slideshow Section (no changes here) */
+/* Car Slideshow Section (no changes needed for appearance, but JS is fixed) */
 .car-slideshow-section {
     background-color: #2a2a2a;
     padding: 60px 0;
@@ -161,13 +160,13 @@ section {
 }
 
 .mySlides {
-    display: none;
+    display: none; /* Hidden by default - JS will handle this */
     text-align: center;
 }
 
 .mySlides img {
     width: 100%;
-    height: 300px;
+    height: 300px; /* Fixed height for slideshow */
     object-fit: cover;
     border-radius: 8px;
 }
@@ -183,7 +182,7 @@ section {
     to {opacity: 1}
 }
 
-/* Accordion Styling for Features (no changes here) */
+/* Accordion Styling for Features (no changes needed for appearance, but JS is fixed) */
 .features-accordion-section {
     background-color: #1a1a1a;
 }
@@ -230,16 +229,16 @@ section {
 }
 
 .accordion-content {
-    padding: 0 25px;
+    padding: 0 25px; /* Initial padding 0 */
     background-color: #2a2a2a;
-    max-height: 0;
+    max-height: 0; /* Hidden initially */
     overflow: hidden;
     transition: max-height 0.4s ease-out, padding 0.4s ease-out;
 }
 
 .accordion-content.show {
-    max-height: 1000px;
-    padding: 25px;
+    max-height: 1000px; /* Sufficiently large to reveal content */
+    padding: 25px; /* Apply padding when shown */
 }
 
 .accordion-content p {
@@ -265,7 +264,7 @@ section {
 }
 
 
-/* Testimonials Carousel (no changes here) */
+/* Testimonials Carousel (no changes needed for appearance, but JS is fixed) */
 .testimonials-section {
     position: relative;
     overflow: hidden;
@@ -343,12 +342,11 @@ footer {
         font-size: 1em;
     }
     .partner-links-grid {
-        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); /* Smaller min-width for grid cells */
-        gap: 10px; /* Reduce gap */
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Smaller grid cells for medium screens */
     }
     .partner-item {
-        width: 60px; /* Smaller thumbnail width */
-        height: 50px; /* Smaller thumbnail height */
+        width: 100px; /* Adjust size */
+        height: 70px; /* Adjust size */
     }
 }
 
@@ -364,10 +362,11 @@ footer {
     }
     .mySlides img { height: 150px; }
     .partner-links-grid {
-        grid-template-columns: repeat(auto-fit, minmax(45px, 1fr)); /* Even smaller min-width for grid cells */
+        grid-template-columns: repeat(auto-fit, minmax(70px, 1fr)); /* Even smaller grid cells for small screens */
+        gap: 10px;
     }
     .partner-item {
-        width: 45px; /* Even smaller thumbnail width */
-        height: 35px; /* Even smaller thumbnail height */
+        width: 70px; /* Adjust size */
+        height: 50px; /* Adjust size */
     }
 }
