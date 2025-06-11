@@ -1,4 +1,4 @@
-/* Basic Reset & Typography */
+/* Basic Reset & Typography (no changes here) */
 * {
     margin: 0;
     padding: 0;
@@ -7,15 +7,15 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #1a1a1a; /* Dark background */
+    background-color: #1a1a1a;
     color: #e0e0e0;
     line-height: 1.6;
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-x: hidden;
 }
 
 h1, h2, h3 {
-    font-family: 'Orbitron', sans-serif; /* Techy/racing font */
-    color: #00f0ff; /* Bright accent color */
+    font-family: 'Orbitron', sans-serif;
+    color: #00f0ff;
     text-align: center;
     margin-bottom: 20px;
 }
@@ -30,7 +30,7 @@ h3 { font-size: 1.8em; }
     padding: 40px 20px;
 }
 
-/* Buttons */
+/* Buttons (no changes here) */
 .cta-button {
     display: inline-block;
     background-color: #00f0ff;
@@ -59,7 +59,14 @@ h3 { font-size: 1.8em; }
     color: #1a1a1a;
 }
 
-/* Hero Section */
+.download-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* Hero Section (no changes here) */
 .hero-section {
     position: relative;
     height: 100vh;
@@ -67,12 +74,12 @@ h3 { font-size: 1.8em; }
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-image: url('https://imgur.com/6I0PALj.jpg'); /* Replace with your hero car image */
+    background-image: url('https://imgur.com/6I0PALj.jpg');
     background-size: cover;
     background-position: center;
     color: white;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-    overflow: hidden; /* For parallax effect if added later */
+    overflow: hidden;
 }
 
 .hero-content {
@@ -80,106 +87,189 @@ h3 { font-size: 1.8em; }
     padding: 20px;
 }
 
-/* Section Styling */
+/* Section Styling (no changes here) */
 section {
     padding: 80px 0;
-    background-color: #222; /* Slightly lighter dark for contrast */
+    background-color: #222;
     margin-bottom: 20px;
 }
 
-.intro-section, .evo-comparison-section, .cta-bottom-section {
+.intro-section, .cta-bottom-section {
     background-color: #1a1a1a;
 }
 
-/* Images */
-.intro-image, .comparison-image, .feature-image, .testimonial-image {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 40px auto;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0,240,255,0.5); /* Glowing effect */
-}
-
-/* Features Grid */
-.feature-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
-}
-
-.feature-card {
-    background-color: #2a2a2a;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+/* **CORRECTED** Partners Section (now at bottom) */
+.partners-section {
+    background-color: #1a1a1a;
+    padding: 40px 0;
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.feature-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 20px rgba(0,240,255,0.7);
+.partner-links-grid {
+    display: grid;
+    /* Use a fixed column width for thumbnails, with auto-fit for responsiveness */
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Each cell is at least 100px */
+    gap: 15px; /* Reduce gap slightly */
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    max-width: 900px; /* Constrain grid width if logos spread too wide */
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.feature-card h3 {
-    color: #00f0ff;
-    margin-bottom: 15px;
-    font-size: 1.5em;
+.partner-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Set a fixed size for the container of each logo */
+    width: 100px; /* Thumbnail width */
+    height: 80px; /* Thumbnail height */
+    overflow: hidden; /* Crucial: hide anything outside this box */
+    margin: 0 auto; /* Center items within their grid cell */
 }
 
-.feature-card p {
-    font-size: 0.95em;
-    margin-bottom: 10px;
-}
-
-.feature-card .what-it-is, .feature-card .why-it-matters {
-    text-align: left; /* Align text within the card */
-}
-
-.feature-card .feature-image {
-    max-width: 90%;
-    margin-top: 20px;
+.partner-item img {
+    /* Set width/height directly on the image, combined with object-fit */
+    width: 100%; /* Make image fill the partner-item's width */
+    height: 100%; /* Make image fill the partner-item's height */
+    object-fit: contain; /* Shrink to fit inside, maintaining aspect ratio */
+    filter: grayscale(100%);
+    transition: filter 0.3s ease, transform 0.3s ease;
     border-radius: 5px;
 }
 
-/* Comparison Grid */
-.comparison-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 30px;
-    margin-top: 40px;
+.partner-item img:hover {
+    filter: grayscale(0%);
+    transform: scale(1.05);
 }
 
-.comparison-grid .column {
-    flex: 1;
-    min-width: 300px;
+
+/* Car Slideshow Section (no changes here) */
+.car-slideshow-section {
     background-color: #2a2a2a;
-    padding: 30px;
+    padding: 60px 0;
+}
+
+.slideshow-container {
+    max-width: 800px;
+    position: relative;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,240,255,0.4);
+}
+
+.mySlides {
+    display: none;
+    text-align: center;
+}
+
+.mySlides img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
     border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-.comparison-grid ul {
-    list-style: none;
-    padding: 0;
+/* Fading animation (no changes here) */
+.fade {
+    animation-name: fade;
+    animation-duration: 1.5s;
 }
 
-.comparison-grid li {
-    padding: 10px 0;
-    border-bottom: 1px solid #3a3a3a;
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
 }
 
-.comparison-grid li:last-child {
-    border-bottom: none;
+/* Accordion Styling for Features (no changes here) */
+.features-accordion-section {
+    background-color: #1a1a1a;
 }
 
-/* Testimonials Carousel */
+.accordion-item {
+    margin-bottom: 15px;
+    border: 1px solid #00f0ff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.accordion-header {
+    background-color: #00f0ff;
+    color: #1a1a1a;
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-header:hover {
+    background-color: #00b3cc;
+}
+
+.accordion-header h3 {
+    margin: 0;
+    color: #1a1a1a;
+    text-align: left;
+}
+
+.accordion-header i {
+    transition: transform 0.3s ease;
+}
+
+.accordion-header.active i {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    padding: 0 25px;
+    background-color: #2a2a2a;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+}
+
+.accordion-content.show {
+    max-height: 1000px;
+    padding: 25px;
+}
+
+.accordion-content p {
+    margin-bottom: 15px;
+}
+
+.accordion-content h4 {
+    color: #00f0ff;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+    text-align: left;
+}
+
+.accordion-content ul {
+    list-style: disc;
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.accordion-content li {
+    margin-bottom: 5px;
+}
+
+
+/* Testimonials Carousel (no changes here) */
 .testimonials-section {
     position: relative;
     overflow: hidden;
+    background-color: #2a2a2a;
 }
 
 .testimonial-carousel {
@@ -189,10 +279,10 @@ section {
 }
 
 .testimonial-slide {
-    min-width: 100%; /* Each slide takes full width */
+    min-width: 100%;
     padding: 20px;
     text-align: center;
-    flex-shrink: 0; /* Prevent shrinking */
+    flex-shrink: 0;
 }
 
 .testimonial-slide p {
@@ -218,32 +308,7 @@ section {
 .carousel-nav.prev { left: 20px; }
 .carousel-nav.next { right: 20px; }
 
-/* Sponsors Section */
-.sponsors-section {
-    background-color: #1a1a1a; /* Match hero and intro for consistency */
-}
-
-.sponsor-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 40px;
-    margin-top: 40px;
-}
-
-.sponsor-grid img {
-    max-width: 100%; /* Ensure image scales within container */
-    height: auto;
-    filter: grayscale(100%);
-    transition: filter 0.3s ease, transform 0.3s ease;
-}
-
-.sponsor-grid img:hover {
-    filter: grayscale(0%);
-    transform: scale(1.05);
-}
-
-/* Footer */
+/* Footer (no changes here) */
 footer {
     background-color: #111;
     color: #888;
@@ -252,7 +317,7 @@ footer {
     font-size: 0.9em;
 }
 
-/* For scroll animations */
+/* For scroll animations (no changes here) */
 .hidden {
     opacity: 0;
     transform: translateY(50px);
@@ -264,20 +329,26 @@ footer {
     transform: translateY(0);
 }
 
-/* Responsive Design */
+/* Responsive Design (updated partner section) */
 @media (max-width: 768px) {
     h1 { font-size: 2.5em; }
     h2 { font-size: 2em; }
     .hero-content { padding: 10px; }
-    .feature-grid, .comparison-grid {
-        grid-template-columns: 1fr;
-    }
+    .mySlides img { height: 200px; }
     .carousel-nav {
         padding: 8px 12px;
         font-size: 1.2em;
     }
-    .sponsor-grid img {
-        max-width: 120px; /* Adjust for smaller screens */
+    .accordion-header h3 {
+        font-size: 1em;
+    }
+    .partner-links-grid {
+        grid-template-columns: repeat(auto-fit, minmax(60px, 1fr)); /* Smaller min-width for grid cells */
+        gap: 10px; /* Reduce gap */
+    }
+    .partner-item {
+        width: 60px; /* Smaller thumbnail width */
+        height: 50px; /* Smaller thumbnail height */
     }
 }
 
@@ -291,7 +362,12 @@ footer {
     .testimonial-slide p {
         font-size: 1em;
     }
-    .sponsor-grid img {
-        max-width: 100px; /* Adjust for even smaller screens */
+    .mySlides img { height: 150px; }
+    .partner-links-grid {
+        grid-template-columns: repeat(auto-fit, minmax(45px, 1fr)); /* Even smaller min-width for grid cells */
+    }
+    .partner-item {
+        width: 45px; /* Even smaller thumbnail width */
+        height: 35px; /* Even smaller thumbnail height */
     }
 }
