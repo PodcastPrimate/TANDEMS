@@ -1,4 +1,4 @@
-/* Basic Reset & Typography (no changes here) */
+/* Basic Reset & Typography */
 * {
     margin: 0;
     padding: 0;
@@ -24,13 +24,17 @@ h1 { font-size: 3.5em; }
 h2 { font-size: 2.5em; }
 h3 { font-size: 1.8em; }
 
+/* Global Centering for Main Content Sections */
+/* The .container class already helps with max-width and margin: 0 auto; */
+/* Ensuring sections are centered, but specific content like the testimonial slides need more attention */
+
 .container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 0 auto; /* This centers the container itself */
     padding: 40px 20px;
 }
 
-/* Buttons (no changes here) */
+/* Buttons */
 .cta-button {
     display: inline-block;
     background-color: #00f0ff;
@@ -68,67 +72,61 @@ h3 { font-size: 1.8em; }
 
 /* Hero Section - Now with background slideshow */
 .hero-section {
-    position: relative; /* Crucial for absolute positioning of children */
-    height: 100vh; /* Full viewport height */
-    display: flex; /* For centering content */
+    position: relative;
+    height: 100vh;
+    display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: #000; /* Fallback background color */
+    background-color: #000;
     color: white;
-    overflow: hidden; /* Hide anything outside the hero section */
+    overflow: hidden;
 }
 
-/* Slideshow container for the BACKGROUND within hero */
 .hero-background-slideshow {
-    position: absolute; /* Position relative to hero-section */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0; /* Ensures it's at the very back */
-    /* No border-radius or box-shadow here as it's a background */
+    z-index: 0;
 }
 
 .hero-background-slideshow .mySlides {
-    position: absolute; /* Position each slide within the slideshow container */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    display: none; /* Controlled by JS */
-    /* No animation here, as fade is applied to the image directly if needed, or handled by JS */
+    display: none;
 }
 
 .hero-background-slideshow .mySlides img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Crucial: make image fill container, cropping if necessary */
-    filter: brightness(0.6); /* Slightly dim the background images for readability */
-    /* No border-radius here as it's a background */
+    object-fit: cover;
+    filter: brightness(0.6);
 }
 
-/* Overlay for hero text readability */
 .hero-slideshow-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* Semi-transparent black overlay */
-    z-index: 1; /* Above slideshow, below content */
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
 }
 
-/* Hero Content (text and button) */
 .hero-content {
-    z-index: 2; /* Ensure content is on top of overlay and slideshow */
-    position: relative; /* Ensures z-index takes effect and content is positioned correctly */
+    z-index: 2;
+    position: relative;
     padding: 20px;
-    text-shadow: 2px 2px 6px rgba(0,0,0,0.9); /* Stronger shadow for readability */
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.9);
 }
 
 
-/* Section Styling (no changes here) */
+/* Section Styling */
 section {
     padding: 80px 0;
     background-color: #222;
@@ -139,7 +137,7 @@ section {
     background-color: #1a1a1a;
 }
 
-/* Partners Section (still at bottom, no changes from last fix) */
+/* Partners Section (at bottom, properly sized) */
 .partners-section {
     background-color: #1a1a1a;
     padding: 40px 0;
@@ -180,7 +178,7 @@ section {
     transform: scale(1.05);
 }
 
-/* Accordion Styling for Features (no changes here) */
+/* Accordion Styling for Features */
 .features-accordion-section {
     background-color: #1a1a1a;
 }
@@ -235,12 +233,13 @@ section {
 }
 
 .accordion-content.show {
-    max-height: 1000px;
+    max-height: 1200px; /* Increased max-height to ensure all content fits */
     padding: 25px;
 }
 
 .accordion-content p {
     margin-bottom: 15px;
+    text-align: left; /* Ensure paragraphs are left-aligned inside */
 }
 
 .accordion-content h4 {
@@ -255,6 +254,7 @@ section {
     list-style: disc;
     margin-left: 20px;
     margin-bottom: 15px;
+    text-align: left; /* Ensure lists are left-aligned */
 }
 
 .accordion-content li {
@@ -262,30 +262,42 @@ section {
 }
 
 
-/* Testimonials Carousel (no changes here) */
+/* Testimonials Carousel - Fix for overflow and centering */
 .testimonials-section {
     position: relative;
     overflow: hidden;
     background-color: #2a2a2a;
+    padding: 60px 0; /* Adjust padding if needed */
+}
+
+.testimonials-section .container {
+    max-width: 800px; /* Constrain width for better quote readability */
+    overflow: hidden; /* Hide overflowing slides */
 }
 
 .testimonial-carousel {
     display: flex;
     transition: transform 0.5s ease-in-out;
     margin-top: 40px;
+    /* Ensure content inside slides doesn't cause overflow */
+    align-items: flex-start; /* Align content to top within flex item */
+    justify-content: center; /* Center slides within view */
 }
 
 .testimonial-slide {
-    min-width: 100%;
-    padding: 20px;
+    min-width: 100%; /* Each slide takes full width of the container */
+    padding: 0 40px; /* Add horizontal padding to prevent text from touching edges */
     text-align: center;
     flex-shrink: 0;
+    box-sizing: border-box; /* Include padding in width calculation */
 }
 
 .testimonial-slide p {
     font-style: italic;
     font-size: 1.1em;
     margin-bottom: 20px;
+    white-space: normal; /* Allow text to wrap normally */
+    overflow-wrap: break-word; /* Break long words if necessary */
 }
 
 .carousel-nav {
@@ -326,18 +338,20 @@ footer {
     transform: translateY(0);
 }
 
-/* Responsive Design (updated partner section, and new hero slideshow) */
+/* Responsive Design */
 @media (max-width: 768px) {
     h1 { font-size: 2.5em; }
     h2 { font-size: 2em; }
     .hero-content { padding: 10px; }
-    /* Hero slideshow images will cover the full hero section */
     .carousel-nav {
         padding: 8px 12px;
         font-size: 1.2em;
     }
     .accordion-header h3 {
         font-size: 1em;
+    }
+    .testimonial-slide {
+        padding: 0 20px; /* Reduce padding on smaller screens */
     }
     .partner-links-grid {
         grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -358,7 +372,9 @@ footer {
     .testimonial-slide p {
         font-size: 1em;
     }
-    /* Hero slideshow images will cover the full hero section */
+    .testimonial-slide {
+        padding: 0 10px; /* Further reduce padding on very small screens */
+    }
     .partner-links-grid {
         grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
         gap: 10px;
