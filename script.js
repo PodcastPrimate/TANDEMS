@@ -15,12 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.accordion-header').forEach(h => {
                 h.classList.remove('active');
                 const content = h.nextElementSibling;
-                if (content) { // Check if content exists
+                if (content) {
                     content.classList.remove('show');
                 }
                 const icon = h.querySelector('i');
-                if (icon) { // Check if icon exists
-                    icon.classList.remove('fa-chevron-up'); // Ensure it's down
+                if (icon) {
+                    icon.classList.remove('fa-chevron-up');
                     icon.classList.add('fa-chevron-down');
                 }
             });
@@ -28,15 +28,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // If the clicked accordion was not active, open it
             if (!isActive) {
                 header.classList.add('active');
-                if (accordionContent) { // Check if content exists
+                if (accordionContent) {
                     accordionContent.classList.add('show');
                 }
-                if (chevronIcon) { // Check if icon exists
+                if (chevronIcon) {
                     chevronIcon.classList.remove('fa-chevron-down');
-                    chevronIcon.classList.add('fa-chevron-up'); // Point up when active
+                    chevronIcon.classList.add('fa-chevron-up');
                 }
             }
-            // If it was already active, the "close all" step above will have closed it.
         });
     });
 
@@ -49,18 +48,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentTestimonialIndex = 0;
 
     function updateTestimonialCarousel() {
-        if (testimonialSlides.length === 0) return; // Exit if no slides
+        if (testimonialSlides.length === 0) return;
 
-        // Ensure currentTestimonialIndex is within bounds
-        if (currentTestimonialIndex < 0) currentTestimonialIndex = testimonialSlides.length - 1;
-        if (currentTestimonialIndex >= testimonialSlides.length) currentTestimonialIndex = 0;
+        currentTestimonialIndex = (currentTestimonialIndex < 0) ? testimonialSlides.length - 1 : currentTestimonialIndex;
+        currentTestimonialIndex = (currentTestimonialIndex >= testimonialSlides.length) ? 0 : currentTestimonialIndex;
 
-        // Use clientWidth which is more reliable for scrollable elements
-        const slideWidth = testimonialSlides[0].clientWidth;
+        const slideWidth = testimonialSlides[0].clientWidth; // Use clientWidth for actual rendered width
         testimonialCarousel.style.transform = `translateX(${-currentTestimonialIndex * slideWidth}px)`;
     }
 
-    if (prevButton && nextButton && testimonialCarousel && testimonialSlides.length > 0) { // Only attach listeners if elements exist
+    // Only attach listeners if elements exist and there's more than one slide
+    if (prevButton && nextButton && testimonialCarousel && testimonialSlides.length > 1) {
         prevButton.addEventListener('click', () => {
             currentTestimonialIndex--;
             updateTestimonialCarousel();
@@ -71,43 +69,51 @@ document.addEventListener('DOMContentLoaded', () => {
             updateTestimonialCarousel();
         });
 
-        // Initialize carousel on resize and load
         window.addEventListener('resize', updateTestimonialCarousel);
-        updateTestimonialCarousel();
+        updateTestimonialCarousel(); // Initial call
+    } else if (testimonialSlides.length <= 1) {
+        // If there's 0 or 1 slide, hide navigation buttons
+        if (prevButton) prevButton.style.display = 'none';
+        if (nextButton) nextButton.style.display = 'none';
+        // Ensure the single slide is visible
+        if (testimonialSlides.length === 1) {
+             testimonialSlides[0].style.display = 'block';
+        }
     }
 
 
-    // --- Car Slideshow Logic (Automatic) ---
-    let slideIndex = 0;
-    const carSlides = document.querySelectorAll('.mySlides');
+    // --- Car Slideshow Logic (Automatic - now for Hero Background) ---
+    let heroSlideIndex = 0; // Use a distinct index variable for clarity
+    // TARGET THE NEW LOCATION OF SLIDES
+    const heroSlides = document.querySelectorAll('.hero-background-slideshow .mySlides');
 
-    function showSlides() {
-        if (carSlides.length === 0) return; // Exit if no slides
+    function showHeroSlides() {
+        if (heroSlides.length === 0) return;
 
         // Hide all slides first
-        carSlides.forEach(slide => {
+        heroSlides.forEach(slide => {
             slide.style.display = "none";
         });
 
         // Increment index, reset if at end
-        slideIndex++;
-        if (slideIndex > carSlides.length) {
-            slideIndex = 1; // Loop back to the first slide
+        heroSlideIndex++;
+        if (heroSlideIndex > heroSlides.length) {
+            heroSlideIndex = 1; // Loop back to the first slide
         }
 
         // Display current slide
-        carSlides[slideIndex - 1].style.display = "block";
+        heroSlides[heroSlideIndex - 1].style.display = "block";
 
-        // Call showSlides again after 3 seconds (adjust as needed)
-        setTimeout(showSlides, 3000);
+        // Call showHeroSlides again after 4 seconds (slightly longer for background)
+        setTimeout(showHeroSlides, 4000); // Changed to 4 seconds for background
     }
 
     // Only start the slideshow if there are slides
-    if (carSlides.length > 0) {
+    if (heroSlides.length > 0) {
         // Ensure the first slide is visible immediately on load
-        carSlides[0].style.display = "block";
-        slideIndex = 1; // Set index for the next slide to be displayed by setTimeout
-        setTimeout(showSlides, 3000); // Start the loop after initial display
+        heroSlides[0].style.display = "block";
+        heroSlideIndex = 1; // Set index for the next slide to be displayed by setTimeout
+        setTimeout(showHeroSlides, 4000); // Start the loop after initial display
     }
 
 
@@ -124,13 +130,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
             } else {
-                entry.target.classList.remove('visible'); // Optional: remove when not visible
+                entry.target.classList.remove('visible');
             }
         });
     }, observerOptions);
 
     sections.forEach(section => {
         observer.observe(section);
-        section.classList.add('hidden'); // Add initial hidden class for animation
+        section.classList.add('hidden');
     });
 });
