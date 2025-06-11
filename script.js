@@ -1,98 +1,136 @@
-// script.js
-
-// Slideshow Logic
-let slideIndex = 0;
-showSlides(); // Start the slideshow on page load
-
-function showSlides() {
-    let i;
-    let slides = document.getElementsByClassName("mySlides");
-    let dots = document.getElementsByClassName("dot");
-    
-    // Hide all slides
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-    
-    // Increment slideIndex, reset if at the end
-    slideIndex++;
-    if (slideIndex > slides.length) {slideIndex = 1} 
-    
-    // Remove 'active' class from all dots
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
-    }
-    
-    // Display the current slide and mark its dot as active
-    slides[slideIndex-1].style.display = "block";
-    dots[slideIndex-1].className += " active";
-    
-    // Call showSlides again after 5 seconds for automatic progression
-    setTimeout(showSlides, 5000); // Change image every 5 seconds
-}
-
-// Manual controls (optional)
-function plusSlides(n) {
-  showSlidesManual(slideIndex += n);
-}
-
-function currentSlide(n) {
-  showSlidesManual(slideIndex = n);
-}
-
-function showSlidesManual(n) {
-  let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-  
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-}
-
-
-// Tab Switching Logic
 document.addEventListener('DOMContentLoaded', () => {
-    const navLinks = document.querySelectorAll('.nav-link');
-    const contentSections = document.querySelectorAll('.content-section');
 
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            // Prevent default link behavior (don't navigate to a new page)
-            e.preventDefault(); 
-            
-            // Get the ID of the target content section from the href attribute
-            const targetId = e.target.getAttribute('href').substring(1);
+    // --- Accordion Logic ---
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
 
-            // Remove 'active' class from all navigation links
-            navLinks.forEach(nav => nav.classList.remove('active'));
-            // Add 'active' class to the clicked link
-            e.target.classList.add('active');
+    accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const accordionContent = header.nextElementSibling;
+            const chevronIcon = header.querySelector('i');
 
-            // Hide all content sections and show only the target one
-            contentSections.forEach(section => {
-                if (section.id === targetId) {
-                    section.classList.add('active'); // Show this section
-                } else {
-                    section.classList.remove('active'); // Hide others
+            // Check if this accordion is currently active
+            const isActive = header.classList.contains('active');
+
+            // Close all accordions first (this ensures only one is open at a time)
+            document.querySelectorAll('.accordion-header').forEach(h => {
+                h.classList.remove('active');
+                const content = h.nextElementSibling;
+                if (content) { // Check if content exists
+                    content.classList.remove('show');
+                }
+                const icon = h.querySelector('i');
+                if (icon) { // Check if icon exists
+                    icon.classList.remove('fa-chevron-up'); // Ensure it's down
+                    icon.classList.add('fa-chevron-down');
                 }
             });
+
+            // If the clicked accordion was not active, open it
+            if (!isActive) {
+                header.classList.add('active');
+                if (accordionContent) { // Check if content exists
+                    accordionContent.classList.add('show');
+                }
+                if (chevronIcon) { // Check if icon exists
+                    chevronIcon.classList.remove('fa-chevron-down');
+                    chevronIcon.classList.add('fa-chevron-up'); // Point up when active
+                }
+            }
+            // If it was already active, the "close all" step above will have closed it.
         });
     });
 
-    // Activate the first section on initial page load (e.g., Downloads)
-    // This ensures content is visible when the page first loads
-    if (contentSections.length > 0) {
-        contentSections[0].classList.add('active');
-        navLinks[0].classList.add('active');
+
+    // --- Testimonial Carousel Logic ---
+    const testimonialCarousel = document.querySelector('.testimonial-carousel');
+    const prevButton = document.querySelector('.carousel-nav.prev');
+    const nextButton = document.querySelector('.carousel-nav.next');
+    const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+    let currentTestimonialIndex = 0;
+
+    function updateTestimonialCarousel() {
+        if (testimonialSlides.length === 0) return; // Exit if no slides
+
+        // Ensure currentTestimonialIndex is within bounds
+        if (currentTestimonialIndex < 0) currentTestimonialIndex = testimonialSlides.length - 1;
+        if (currentTestimonialIndex >= testimonialSlides.length) currentTestimonialIndex = 0;
+
+        // Use clientWidth which is more reliable for scrollable elements
+        const slideWidth = testimonialSlides[0].clientWidth;
+        testimonialCarousel.style.transform = `translateX(${-currentTestimonialIndex * slideWidth}px)`;
     }
+
+    if (prevButton && nextButton && testimonialCarousel && testimonialSlides.length > 0) { // Only attach listeners if elements exist
+        prevButton.addEventListener('click', () => {
+            currentTestimonialIndex--;
+            updateTestimonialCarousel();
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentTestimonialIndex++;
+            updateTestimonialCarousel();
+        });
+
+        // Initialize carousel on resize and load
+        window.addEventListener('resize', updateTestimonialCarousel);
+        updateTestimonialCarousel();
+    }
+
+
+    // --- Car Slideshow Logic (Automatic) ---
+    let slideIndex = 0;
+    const carSlides = document.querySelectorAll('.mySlides');
+
+    function showSlides() {
+        if (carSlides.length === 0) return; // Exit if no slides
+
+        // Hide all slides first
+        carSlides.forEach(slide => {
+            slide.style.display = "none";
+        });
+
+        // Increment index, reset if at end
+        slideIndex++;
+        if (slideIndex > carSlides.length) {
+            slideIndex = 1; // Loop back to the first slide
+        }
+
+        // Display current slide
+        carSlides[slideIndex - 1].style.display = "block";
+
+        // Call showSlides again after 3 seconds (adjust as needed)
+        setTimeout(showSlides, 3000);
+    }
+
+    // Only start the slideshow if there are slides
+    if (carSlides.length > 0) {
+        // Ensure the first slide is visible immediately on load
+        carSlides[0].style.display = "block";
+        slideIndex = 1; // Set index for the next slide to be displayed by setTimeout
+        setTimeout(showSlides, 3000); // Start the loop after initial display
+    }
+
+
+    // --- Scroll Animation for Sections ---
+    const sections = document.querySelectorAll('section');
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            } else {
+                entry.target.classList.remove('visible'); // Optional: remove when not visible
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
+        section.classList.add('hidden'); // Add initial hidden class for animation
+    });
 });
