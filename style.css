@@ -68,63 +68,63 @@ h3 { font-size: 1.8em; }
 
 /* Hero Section - Now with background slideshow */
 .hero-section {
-    position: relative;
-    height: 100vh;
-    display: flex;
+    position: relative; /* Crucial for absolute positioning of children */
+    height: 100vh; /* Full viewport height */
+    display: flex; /* For centering content */
     justify-content: center;
     align-items: center;
     text-align: center;
-    /* REMOVED: background-image property */
     background-color: #000; /* Fallback background color */
     color: white;
-    overflow: hidden; /* Hide overflow from absolute positioned children */
+    overflow: hidden; /* Hide anything outside the hero section */
 }
 
-/* New: Slideshow container within hero */
+/* Slideshow container for the BACKGROUND within hero */
 .hero-background-slideshow {
     position: absolute; /* Position relative to hero-section */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0; /* Behind content */
-    border-radius: 0; /* Remove previous border-radius */
-    box-shadow: none; /* Remove previous box-shadow */
+    z-index: 0; /* Ensures it's at the very back */
+    /* No border-radius or box-shadow here as it's a background */
 }
 
 .hero-background-slideshow .mySlides {
-    position: absolute; /* Position slides within the slideshow container */
+    position: absolute; /* Position each slide within the slideshow container */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    display: none;
-    animation: none; /* Remove fade animation from the previous slideshow */
+    display: none; /* Controlled by JS */
+    /* No animation here, as fade is applied to the image directly if needed, or handled by JS */
 }
 
 .hero-background-slideshow .mySlides img {
     width: 100%;
     height: 100%;
     object-fit: cover; /* Crucial: make image fill container, cropping if necessary */
-    border-radius: 0; /* Remove previous border-radius */
+    filter: brightness(0.6); /* Slightly dim the background images for readability */
+    /* No border-radius here as it's a background */
 }
 
-/* NEW: Overlay for hero text readability */
+/* Overlay for hero text readability */
 .hero-slideshow-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6); /* Semi-transparent black overlay */
+    background: rgba(0, 0, 0, 0.4); /* Semi-transparent black overlay */
     z-index: 1; /* Above slideshow, below content */
 }
 
+/* Hero Content (text and button) */
 .hero-content {
-    z-index: 2; /* Ensure content is on top */
-    position: relative; /* Ensure content is positioned correctly above overlay */
+    z-index: 2; /* Ensure content is on top of overlay and slideshow */
+    position: relative; /* Ensures z-index takes effect and content is positioned correctly */
     padding: 20px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8); /* Stronger shadow for readability */
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.9); /* Stronger shadow for readability */
 }
 
 
@@ -179,9 +179,6 @@ section {
 .partner-item img:hover {
     transform: scale(1.05);
 }
-
-/* Original car-slideshow-section is removed */
-
 
 /* Accordion Styling for Features (no changes here) */
 .features-accordion-section {
